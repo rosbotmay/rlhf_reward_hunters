@@ -59,12 +59,12 @@ if __name__ == "__main__":
     plot_preferences_balance(preference_pairs)
 
     # Initialize DPO model and train it
-    """dpo_model = DPOModel(input_size=6, output_size=1)  # 3 features from `get_features`
+    dpo_model = DPOModel(input_size=6, output_size=1)  # 3 features from `get_features`
     dpo = DPO(dpo_model, preference_pairs,lr=1e-4)
-    dpo.train(epochs=10)"""
+    dpo.train(epochs=10)
 
-    
-    # Initialize PPO-RHLF and train it
+    #not working for now..
+    """ # Initialize PPO-RHLF and train it
     env = gym.make('MountainCar-v0')
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
@@ -73,4 +73,4 @@ if __name__ == "__main__":
     reward_model = RewardModel(input_size=state_size + 1)  # Assuming state + action for the reward model
 
     ppo_rhlf = PPO_RHLF(ppo_policy, reward_model, env)
-    ppo_rhlf.train(preference_pairs)
+    ppo_rhlf.train(preference_pairs)"""
