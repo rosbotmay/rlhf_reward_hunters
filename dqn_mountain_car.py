@@ -23,10 +23,9 @@ class QNetwork(nn.Module):
         """print(f"self.fc3(x) : {out.shape}")"""
         return out  # This should return shape (batch_size, num_actions)
 
-
 # DQN Agent class
 class DQNAgent:
-    def __init__(self, state_size, action_size, gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.995, learning_rate=1e-3, batch_size=128, memory_size=100000):
+    def __init__(self, state_size, action_size, gamma=0.99, epsilon=1.0, epsilon_min=0.01, epsilon_decay=0.99999, learning_rate=1e-3, batch_size=64, memory_size=100000):
         self.state_size = state_size
         self.action_size = action_size
         self.gamma = gamma
@@ -136,6 +135,8 @@ class DQNAgent:
 def DQN_training(agent,env,episodes):
 
     rewards = []
+    saved_pi1 = False
+    saved_pi2 = False
     for e in range(episodes):
         state = env.reset()
         state = np.reshape(state, [1, state_size])
@@ -159,11 +160,20 @@ def DQN_training(agent,env,episodes):
                 print(f"Episode {e+1}/{episodes}, Reward: {total_reward}, Epsilon: {agent.epsilon}")
         rewards.append(total_reward)
         # Save the model after every 50 episodes
-        if e % 50 == 0:
-            agent.save(f"checkpoints/dqn_mountain_car_pi2_{e}.pth")
-    
+
+        if e % 500 == 0:
+            agent.save(f'checkpoints/dqn_mountain_car_{e}.pth')
+
+        if e > 3000 and total_reward > -100 and not saved_pi1:
+            agent.save(f"checkpoints/dqn_mountain_car_pi1.pth")
+            saved_pi1 = True
+        elif e >= 1500 and -130 <= total_reward <= -110 and not saved_pi2:
+            agent.save(f"checkpoints/dqn_mountain_car_pi2.pth")
+            saved_pi2 = True
+        
+       
     # Save the final model
-    agent.save('checkpoints/dqn_mountain_car_pi2_final.pth')
+    agent.save('checkpoints/dqn_mountain_car_final.pth')
 
     return rewards
 
@@ -240,16 +250,15 @@ if __name__ == "__main__":
     action_size = env.action_space.n
 
     agent = DQNAgent(state_size, action_size)
-    episodes = 1500
+    episodes = 4000
     
     rewards = DQN_training(agent,env,episodes)
     plot_training_evlolution(rewards)
 
-    """
-    tst_agent = DQNAgent(state_size, action_size)
-    tst_agent.load("checkpoints/dqn_mountain_car_final.pth")
-    test_agent(agent,env,3)
-    """
+    """tst_agent = DQNAgent(state_size, action_size)
+    tst_agent.load("checkpoints/dqn_mountain_car_pi2_.pth")"""
+    #test_agent(agent,env,3)
+    
 
 
 

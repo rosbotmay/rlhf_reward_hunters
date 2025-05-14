@@ -2,6 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import numpy as np
+import matplotlib.pylab as plt
 
 class DPOModel(nn.Module):
     def __init__(self, input_size, output_size):
@@ -39,8 +40,10 @@ class DPO:
         self.preference_pairs = preference_pairs
         self.optimizer = optim.Adam(self.model.parameters(), lr=lr)
         self.loss_fn = nn.BCEWithLogitsLoss()
+        
 
     def train(self, epochs):
+        self.losses = []
         for epoch in range(epochs):
             total_loss = 0
             for trajectory_pi1, trajectory_pi2, prob_pi1 in self.preference_pairs:
@@ -65,7 +68,21 @@ class DPO:
                 self.optimizer.zero_grad()
                 loss.backward()
                 self.optimizer.step()
-
+            
+             # Store loss for plotting
+            self.losses.append(total_loss / len(self.preference_pairs))
             print(f"Epoch {epoch + 1}, Loss: {total_loss / len(self.preference_pairs)}")
+
+            self.plot_loss()
+        return self.losses
+
+    def plot_loss(self):
+        plt.plot(self.losses)
+        plt.xlabel('Epochs')
+        plt.ylabel('Loss')
+        plt.title('DPO Loss Evolution')
+        plt.savefig(f"results/dpo_training.png")
+         #plt.show()
+        plt.close()
 
 

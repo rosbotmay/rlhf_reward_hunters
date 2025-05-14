@@ -24,8 +24,8 @@ def plot_preferences_balance(preference_pairs):
         return
 
     # Count the number of times each policy is preferred
-    preferred_pi1 = preferences.count(1)  # Count how many times pi1 is preferred
-    preferred_pi2 = preferences.count(0)  # Count how many times pi2 is preferred
+    preferred_pi1 = len([prob for prob in preferences if prob >= 0.5])
+    preferred_pi2 = len(preferences) - preferred_pi1
 
     # Check if there are valid counts
     if preferred_pi1 == 0 and preferred_pi2 == 0:
@@ -41,17 +41,16 @@ def plot_preferences_balance(preference_pairs):
     plt.figure(figsize=(6, 6))
     plt.pie(counts, labels=labels, autopct='%1.1f%%', colors=colors, startangle=90)
     plt.title('Preference Balance')
-
     # Save the plot to a file
     plt.savefig("results/preference_balance.png")
+    plt.close()
 
-# Example of how to use the function
-# plot_preferences_balance(preference_pairs)  # Uncomment to test with your preference pairs
+
 
 
 if __name__ == "__main__":
     # Load preference pairs from the pickle file
-    with open("data/preference_pairs_1000.pkl", "rb") as f:
+    with open("data/preference_pairs_200.pkl", "rb") as f:
         preference_pairs = pickle.load(f)
     
     # Inspect the loaded preference pairs
@@ -59,18 +58,25 @@ if __name__ == "__main__":
     plot_preferences_balance(preference_pairs)
 
     # Initialize DPO model and train it
-    dpo_model = DPOModel(input_size=6, output_size=1)  # 3 features from `get_features`
+    """dpo_model = DPOModel(input_size=6, output_size=1)  # 3 features from `get_features`
     dpo = DPO(dpo_model, preference_pairs,lr=1e-4)
-    dpo.train(epochs=10)
+    dpo.train(epochs=150)"""
 
     #not working for now..
-    """ # Initialize PPO-RHLF and train it
+    # Initialize PPO-RHLF and train it
     env = gym.make('MountainCar-v0')
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
 
-    ppo_policy = PPOPolicy(state_size, action_size)
+    """ppo_policy = PPOPolicy(state_size, action_size)
     reward_model = RewardModel(input_size=state_size + 1)  # Assuming state + action for the reward model
 
     ppo_rhlf = PPO_RHLF(ppo_policy, reward_model, env)
     ppo_rhlf.train(preference_pairs)"""
+
+    ppo_policy = PPOPolicy(state_size, action_size)
+    reward_model = RewardModel(input_size=state_size + 1) # Assuming no reward model is passed for simplicity
+
+    # Train the PPO-RHLF agent
+    ppo_rhlf = PPO_RHLF(ppo_policy, reward_model, env, learning_rate=1e-3, epochs=20)
+    ppo_rhlf.train(preference_pairs)
