@@ -34,7 +34,7 @@ if __name__ == "__main__":
     policy_pi2 = Policy().to(DEVICE)
 
     optimizer_pi2 = optim.Adam(policy_pi2.parameters(), lr=1e-2)
-    scores_pi2 = reinforce(env, policy_pi2, optimizer_pi2, early_stop=True, n_episodes=2000, max_reward = 250)
+    scores_pi2 = reinforce(env, policy_pi2, optimizer_pi2, early_stop=True, n_episodes=2000, max_reward = 150)
 
     fig = plt.figure(figsize=(20, 6))
     ax = fig.add_subplot(111)
