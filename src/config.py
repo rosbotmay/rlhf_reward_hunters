@@ -20,8 +20,8 @@ CHECKPOINT_DIR = os.path.join(PROJECT_ROOT, 'models')
 # N_EVAL_EPISODES = 5
 
 # DPO hyperparams
-DPO_LR       = 1e-4
+DPO_LR       = 1e-3
 DPO_EPOCHS   = 10
-BATCH_SIZE_DPO = 32
+BATCH_SIZE_DPO = 64
 DPO_LAMBDA  = 0.1
 DPO_CLIP_EPS = 0.2

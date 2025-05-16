@@ -24,7 +24,7 @@ if __name__ == "__main__":
 
     policy_pi1 = Policy().to(DEVICE)
 
-    optimizer_pi1 = optim.Adam(policy_pi1.parameters(), lr=1e-2)
+    optimizer_pi1 = optim.Adam(policy_pi1.parameters(), lr=1e-3)
     scores_pi1 = reinforce_rwd2go_baseline(env, policy_pi1, optimizer_pi1, early_stop=True, n_episodes=2000, max_reward = 495)
 
     # Generate subexpert's policy, pi2
@@ -33,8 +33,8 @@ if __name__ == "__main__":
 
     policy_pi2 = Policy().to(DEVICE)
 
-    optimizer_pi2 = optim.Adam(policy_pi2.parameters(), lr=1e-2)
-    scores_pi2 = reinforce(env, policy_pi2, optimizer_pi2, early_stop=True, n_episodes=2000, max_reward = 150)
+    optimizer_pi2 = optim.Adam(policy_pi2.parameters(), lr=1e-3)
+    scores_pi2 = reinforce_rwd2go_baseline(env, policy_pi2, optimizer_pi2, early_stop=True, n_episodes=2000, max_reward = 350)
 
     fig = plt.figure(figsize=(20, 6))
     ax = fig.add_subplot(111)
@@ -48,6 +48,10 @@ if __name__ == "__main__":
     ax.set_xlabel('Episode #', fontsize=20)
     ax.tick_params(axis='both', which='major', labelsize=15)
     ax.legend(fontsize=20)
+    
+    fig_path = os.path.join(DATA_DIR, "training_curves_expert_vs_subexpert.png")
+    plt.savefig(fig_path, bbox_inches='tight')
+    print(f"Saved training plot to {fig_path}")
 
     plt.show()
 

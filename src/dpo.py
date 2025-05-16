@@ -25,14 +25,20 @@ def dpo_batch_loss(policy, batch):
         # tau1: expert, tau2: subexpert
         for s, a, _ in p['tau1']:
             s_t  = torch.tensor(s, dtype=torch.float32, device=device).unsqueeze(0)
-            logp1 += Categorical(policy(s_t)).log_prob(torch.tensor(a, device=device)).sum()
+            # logp1 += Categorical(policy(s_t)).log_prob(torch.tensor(a, device=device)).sum()
+            logp1 += Categorical(policy(s_t)).log_prob(torch.tensor(a, device=device)).view(())
+
         for s, a, _ in p['tau2']:
             s_t  = torch.tensor(s, dtype=torch.float32, device=device).unsqueeze(0)
-            logp2 += Categorical(policy(s_t)).log_prob(torch.tensor(a, device=device)).sum()
+            # logp2 += Categorical(policy(s_t)).log_prob(torch.tensor(a, device=device)).sum()
+            logp2 += Categorical(policy(s_t)).log_prob(torch.tensor(a, device=device)).view(())
+
 
         # normalize by average trajectory length
         L1, L2 = len(p['tau1']), len(p['tau2'])
-        norm = (L1 + L2) / 2 or 1
+        # norm = (L1 + L2) / 2 or 1
+        norm = max((L1 + L2) / 2, 1)
+
         logit  = (logp1 - logp2) / norm
 
         # compute loss
