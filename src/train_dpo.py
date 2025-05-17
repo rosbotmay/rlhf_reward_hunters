@@ -13,11 +13,11 @@ if __name__ == "__main__":
 
     # Set the random seed
     seed = 2
-    set_seed(seed)
+    # set_seed(seed)
     
     # fine-tune via DPO
-    K = 500
-    train_dpo(policy, prefs_file ="prefs_expert_vs_subexpert.pkl", K = 500, seed= 2)
+    K = 1000
+    train_dpo(policy, prefs_file ="prefs_expert_vs_subexpert.pkl", K = 1000, seed= 2)
 
     # CHANGE K AND SEED TO SAVE DPO POLICY
     ckpt = os.path.join(CHECKPOINT_DIR, f"dpo_policy_expert_sub_K{K}_seed{seed}.pth")
