@@ -4,16 +4,6 @@ import random
 from math import exp
 import torch
 
-# Set the random seed
-def set_seed(seed):
-    random.seed(seed)
-    np.random.seed(seed)
-    torch.manual_seed(seed)
-
-    # for CUDA
-    torch.cuda.manual_seed(seed)
-    torch.cuda.manual_seed_all(seed)
-
 # Generate a trajectory using the policy
 def generate_trajectory(policy, env, max_t=1000):
     state, _ = env.reset()
