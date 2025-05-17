@@ -1,0 +1,62 @@
+- 1000 preference pairs :
+DPO Epoch 1/10: loss = 0.7998
+DPO Epoch 2/10: loss = 0.7817
+DPO Epoch 3/10: loss = 0.7619
+DPO Epoch 4/10: loss = 0.7431
+DPO Epoch 5/10: loss = 0.7284
+DPO Epoch 6/10: loss = 0.7171
+DPO Epoch 7/10: loss = 0.7097
+DPO Epoch 8/10: loss = 0.7025
+DPO Epoch 9/10: loss = 0.6973
+DPO Epoch 10/10: loss = 0.6958
+
+pre-DPO Policy: mean return=338.40, std=129.13 over 50 episodes
+DPO Policy: mean return=466.32, std=83.85 over 50 episodes
+
+pre-DPO Policy: mean return=351.37, std=140.12 over 100 episodes
+DPO Policy: mean return=455.48, std=93.51 over 100 episodes
+
+pre-DPO Policy: mean return=365.35, std=137.17 over 100 episodes
+DPO Policy: mean return=451.12, std=97.06 over 100 episodes
+
+- 900 preference pairs:
+DPO Epoch 1/10: loss = 0.8080
+DPO Epoch 2/10: loss = 0.7821
+DPO Epoch 3/10: loss = 0.7692
+DPO Epoch 4/10: loss = 0.7511
+DPO Epoch 5/10: loss = 0.7456
+DPO Epoch 6/10: loss = 0.7214
+DPO Epoch 7/10: loss = 0.7288
+DPO Epoch 8/10: loss = 0.6993
+DPO Epoch 9/10: loss = 0.6993
+DPO Epoch 10/10: loss = 0.7159
+pre-DPO Policy: mean return=346.12, std=122.93 over 50 episodes
+DPO Policy: mean return=428.34, std=108.08 over 50 episodes
+
+- 800 preference pairs:
+DPO Epoch 1/10: loss = 0.8032
+DPO Epoch 2/10: loss = 0.7864
+DPO Epoch 3/10: loss = 0.7709
+DPO Epoch 4/10: loss = 0.7595
+DPO Epoch 5/10: loss = 0.7432
+DPO Epoch 6/10: loss = 0.7324
+DPO Epoch 7/10: loss = 0.7210
+DPO Epoch 8/10: loss = 0.7179
+DPO Epoch 9/10: loss = 0.7120
+DPO Epoch 10/10: loss = 0.7062
+pre-DPO Policy: mean return=348.81, std=147.05 over 100 episodes
+DPO Policy: mean return=396.68, std=129.42 over 100 episodes
+
+- 600 preference pairs:
+DPO Epoch 1/10: loss = 0.8060
+DPO Epoch 2/10: loss = 0.7920
+DPO Epoch 3/10: loss = 0.7802
+DPO Epoch 4/10: loss = 0.7682
+DPO Epoch 5/10: loss = 0.7609
+DPO Epoch 6/10: loss = 0.7468
+DPO Epoch 7/10: loss = 0.7416
+DPO Epoch 8/10: loss = 0.7318
+DPO Epoch 9/10: loss = 0.7293
+DPO Epoch 10/10: loss = 0.7255
+pre-DPO Policy: mean return=362.96, std=134.90 over 50 episodes
+DPO Policy: mean return=329.86, std=144.47 over 50 episodes

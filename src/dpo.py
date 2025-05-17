@@ -80,7 +80,7 @@ def train_dpo(policy, prefs_file):
 
     with open(os.path.join(DATA_DIR, prefs_file), "rb") as f:
         prefs = pickle.load(f)
-    K = 800
+    K = 900
     prefs = prefs[:K]
 
     # dataloader
@@ -106,7 +106,7 @@ def train_dpo(policy, prefs_file):
         print(f"DPO Epoch {ep}/{DPO_EPOCHS}: loss = {total_loss / len(loader):.4f}")
 
     # save
-    out = os.path.join(CHECKPOINT_DIR, "dpo_policy_expert_sub_800.pth")
+    out = os.path.join(CHECKPOINT_DIR, "dpo_policy_expert_sub_900.pth")
     torch.save(policy.state_dict(), out)
     print(f"Saved DPO policy to {out}")
     return policy
