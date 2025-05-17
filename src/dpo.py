@@ -49,10 +49,13 @@ def dpo_batch_loss(policy, batch):
     return torch.stack(losses).mean()
 
 
-def train_dpo(policy, prefs_file):
+def train_dpo(policy, prefs_file, K=1000, seed=0):
     # load prefs
     with open(os.path.join(DATA_DIR, prefs_file), 'rb') as f:
         prefs = pickle.load(f)
+
+    # Keep the first K pairs
+    prefs = prefs[:K]
 
     # dataloader
     loader = DataLoader(
@@ -75,7 +78,7 @@ def train_dpo(policy, prefs_file):
         print(f"DPO Epoch {ep}/{DPO_EPOCHS}: loss = {total_loss/len(loader):.4f}")
 
     # save
-    out = os.path.join(CHECKPOINT_DIR, 'dpo_policy_expert_sub.pth')
+    out = os.path.join(CHECKPOINT_DIR, f'dpo_policy_expert_sub_K{K}_seed{seed}.pth')
     torch.save(policy.state_dict(), out)
     print(f"Saved DPO policy to {out}")
     return policy
