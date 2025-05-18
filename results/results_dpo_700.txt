@@ -1,6 +1,6 @@
 K = 700
-pre-DPO pi2 (over seeds) : mean return = 364.32 ± 9.92
-DPO (over seeds)        : mean return = 354.68 ± 10.94
+pre-DPO pi2 (over seeds) : mean return = 364.32 Â± 9.92
+DPO (over seeds)        : mean return = 354.68 Â± 10.94
 
 Individual seed returns:
   seed=45: pi2 = 372.77, DPO = 339.67
