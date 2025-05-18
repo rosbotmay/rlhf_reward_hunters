@@ -283,8 +283,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--reward_lr", type=float, default=1e-3, help="Reward model learning rate")
     parser.add_argument("--data_dir", type=str, default=DATA_DIR, help="Data directory")
-    parser.add_argument("--pi1_path", type=str, default="C:/Users/ghrab/OneDrive/Bureau/Reinforcement Learning/rlhf_reward_hunters-CartPole/rlhf_reward_hunters-CartPole/policy_pi1.pth", help="Path to pi1 policy")
-    parser.add_argument("--pi2_path", type=str, default="C:/Users/ghrab/OneDrive/Bureau/Reinforcement Learning/rlhf_reward_hunters-CartPole/rlhf_reward_hunters-CartPole/policy_pi2.pth", help="Path to pi2 policy")
+    parser.add_argument("--pi1_path", type=str, default="policy_pi1.pth", help="Path to pi1 policy")
+    parser.add_argument("--pi2_path", type=str, default="policy_pi2.pth", help="Path to pi2 policy")
     args = parser.parse_args()
     
     DATA_DIR = args.data_dir
