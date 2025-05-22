@@ -1,0 +1,39 @@
+Reward model trained for 10 epochs.
+PPO trained for _ timesteps.
+
+K = 1000:
+Individual seed returns:
+  seed=45: PPO = 
+  seed=65: PPO = 
+  seed=76: PPO = 
+
+K = 900:
+Individual seed returns:
+  seed=45: PPO = 
+  seed=65: PPO = 
+  seed=76: PPO = 
+
+K = 800:
+Individual seed returns:
+  seed=45: PPO = 
+  seed=65: PPO = 
+  seed=76: PPO = 
+
+K = 700:
+Individual seed returns:
+  seed=45: PPO = 
+  seed=65: PPO = 
+  seed=76: PPO = 
+
+K = 600:
+Individual seed returns:
+  seed=45: PPO = 
+  seed=65: PPO = 
+  seed=76: PPO = 
+
+K = 500:
+Individual seed returns:
+  seed=45: PPO = 
+  seed=65: PPO = 
+  seed=76: PPO = 
+

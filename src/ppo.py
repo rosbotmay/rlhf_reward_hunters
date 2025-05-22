@@ -57,7 +57,7 @@ def train_reward_model(prefs, state_dim, device):
             for p in batch:
                 tau1 = p["tau1"]
                 tau2 = p["tau2"]
-                pref = p["p_tau1_pref"] 
+                pref = p["p_tau1_pref"]
 
                 ret1 = compute_traj_return(reward_net, tau1)
                 ret2 = compute_traj_return(reward_net, tau2)
@@ -98,7 +98,7 @@ def main():
     print("Loading preferences...")
     with open("../data/prefs_expert_vs_subexpert.pkl", "rb") as f:
         prefs = pickle.load(f)
-    prefs = prefs[:500]
+    prefs = prefs[:900]
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     state_dim = 4
 
@@ -108,9 +108,9 @@ def main():
     env = RewardModelWrapper(gym.make("CartPole-v1"), reward_model, device)
 
     model = PPO("MlpPolicy", env, verbose=1)
-    model.learn(total_timesteps=100_000)
+    model.learn(total_timesteps=15000)
 
-    model.save("ppo_rlhf_cartpole")
+    model.save("ppo_rlhf_cartpole_900")
 
 
 if __name__ == "__main__":
