@@ -57,7 +57,7 @@ def train_reward_model(prefs, state_dim, device):
             for p in batch:
                 tau1 = p["tau1"]
                 tau2 = p["tau2"]
-                pref = p["p_tau1_pref"]  # 1.0 if tau1 preferred, 0.0 otherwise
+                pref = p["p_tau1_pref"] 
 
                 ret1 = compute_traj_return(reward_net, tau1)
                 ret2 = compute_traj_return(reward_net, tau2)
