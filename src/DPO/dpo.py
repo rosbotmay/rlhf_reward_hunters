@@ -10,7 +10,12 @@ import torch.nn.functional as F
 from torch.distributions import Categorical
 from torch.utils.data import DataLoader, Dataset
 
-from config import (
+import sys
+import os
+
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
+from src.config import (
     BATCH_SIZE_DPO,
     CHECKPOINT_DIR,
     DATA_DIR,
@@ -80,7 +85,7 @@ def train_dpo(policy, prefs_file):
 
     with open(os.path.join(DATA_DIR, prefs_file), "rb") as f:
         prefs = pickle.load(f)
-    K = 900
+    K = 700
     prefs = prefs[:K]
 
     # dataloader
@@ -106,14 +111,14 @@ def train_dpo(policy, prefs_file):
         print(f"DPO Epoch {ep}/{DPO_EPOCHS}: loss = {total_loss / len(loader):.4f}")
 
     # save
-    out = os.path.join(CHECKPOINT_DIR, "dpo_policy_expert_sub_900.pth")
+    out = os.path.join(CHECKPOINT_DIR, "dpo_policy_expert_sub_700.pth")
     torch.save(policy.state_dict(), out)
     print(f"Saved DPO policy to {out}")
     return policy
 
 
 def evaluate_dpo_policy(
-    checkpoint_path: str, n_episodes: int = 50
+    checkpoint_path: str, n_episodes: int = 50, seed = 0
 ) -> tuple[float, float]:
     """
     Load a saved DPO policy from `checkpoint_path` and
@@ -121,6 +126,7 @@ def evaluate_dpo_policy(
     """
     # load policy
     env = gym.make(ENV_NAME)
+    env.reset(seed=seed)
     obs_dim = env.observation_space.shape[0]
 
     # for discrete envs, one-hot encode actions
@@ -130,7 +136,7 @@ def evaluate_dpo_policy(
         act_dim = env.action_space.shape[0]
 
     policy = Policy(state_size=obs_dim, action_size=act_dim).to(DEVICE)
-    policy.load_state_dict(torch.load(checkpoint_path))
+    policy.load_state_dict(torch.load(checkpoint_path, map_location=DEVICE))
     policy.eval()
 
     # eval loop

@@ -9,15 +9,14 @@ RESULTS_DIR = os.path.join(PROJECT_ROOT, 'results')
 CHECKPOINT_DIR = os.path.join(PROJECT_ROOT, 'models')
 
 # # PPO hyperparams
-# TOTAL_STEPS     = 200_000
-# BATCH_SIZE      = 2048
-# EPOCHS_PER_BATCH= 10
-# GAMMA, LAMBDA   = 0.99, 0.95
-# CLIP_EPS        = 0.2
-# VF_COEF, ENT_COEF = 0.5, 0.01
-# LR_PI, LR_VF    = 3e-4, 1e-3
-# EVAL_INTERVAL   = BATCH_SIZE
-# N_EVAL_EPISODES = 5
+BATCH_SIZE      = 512
+PPO_EPOCHS      = 6         # number of PPO minibatch passes
+MINI_BATCH      = 128       # minibatch size for PPO epochs
+GAMMA           = 0.99      # discount
+LAM             = 0.95      # GAE lambda
+CLIP_EPS        = 0.2       # PPO clipping epsilon
+LR_PI           = 3e-4      # policy LR
+LR_V            = 1e-3      # value LR
 
 # DPO hyperparams
 DPO_LR       = 1e-3
