@@ -31,20 +31,30 @@ def evaluate(model, env, n_episodes=50):
 
     return mean, ci95
 
-# evaluation environments
-eval_env_subexpert = gym.make(ENV_NAME)
-eval_env_rlhf = gym.make(ENV_NAME)
 
-# load models
-model_subexpert = PPO.load(f"{CHECKPOINT_DIR}\\ppo_subexpert", env=eval_env_subexpert)
-model_rlhf = PPO.load(f"{CHECKPOINT_DIR}\\ppo_rlhf_finetuned_v1", env=eval_env_rlhf)
+if __name__ == "__main__":
+    Ks = [500, 600, 700]
+    seeds = [0, 1, 2]
 
-# evaluate both
-mean_sub, ci_sub = evaluate(model_subexpert, eval_env_subexpert, n_episodes=30)
-mean_rlhf, ci_rlhf = evaluate(model_rlhf, eval_env_rlhf, n_episodes=30)
+    for K in Ks:
+        for seed in seeds:
+            print(f"Evaluating PPO-RLHF with K={K} and seed={seed}...")
+            # evaluation environments
+            eval_env_subexpert = gym.make(ENV_NAME)
+            eval_env_subexpert.reset(seed=seed)
+            eval_env_rlhf = gym.make(ENV_NAME)
+            eval_env_rlhf.reset(seed=seed)
 
-# output results
-print(f"📊 Subexpert: {mean_sub:.2f} ± {ci_sub:.2f} (95% CI)")
-print(f"🚀 PPO-RLHF: {mean_rlhf:.2f} ± {ci_rlhf:.2f} (95% CI)")
-print(f"🎯 Absolute improvement: {mean_rlhf - mean_sub:.2f}")
-print(f"📈 Relative improvement: {(mean_rlhf - mean_sub) / (500 - mean_sub) * 100:.2f}%")
+            # load models
+            model_subexpert = PPO.load(f"{CHECKPOINT_DIR}\\ppo_subexpert", env=eval_env_subexpert)
+            model_rlhf = PPO.load(f"{CHECKPOINT_DIR}\\ppo_rlhf_cartpole_{K}", env=eval_env_rlhf)
+
+            # evaluate both
+            mean_sub, ci_sub = evaluate(model_subexpert, eval_env_subexpert, n_episodes=30)
+            mean_rlhf, ci_rlhf = evaluate(model_rlhf, eval_env_rlhf, n_episodes=30)
+
+            # output results
+            print(f"📊 Subexpert: {mean_sub:.2f} ± {ci_sub:.2f} (95% CI)")
+            print(f"🚀 PPO-RLHF: {mean_rlhf:.2f} ± {ci_rlhf:.2f} (95% CI)")
+            print(f"🎯 Absolute improvement: {mean_rlhf - mean_sub:.2f}")
+            print(f"📈 Relative improvement: {(mean_rlhf - mean_sub) / (500 - mean_sub) * 100:.2f}%")
