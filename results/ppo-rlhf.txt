@@ -1,4 +1,16 @@
 - 5000 iterations:
+    500 pairs:
+        seed 0 => PPO-RLHF: 368.40 ± 38.98
+        seed 1 => PPO-RLHF: 421.63 ± 33.93
+        seed 2 => PPO-RLHF: 392.97 ± 35.06
+    600 pairs:
+        seed 0 => PPO-RLHF: 325.03 ± 27.91
+        seed 1 => PPO-RLHF: 330.07 ± 30.13
+        seed 2 => PPO-RLHF: 344.80 ± 37.36
+    700 pairs:
+        seed 0 => PPO-RLHF: 248.00 ± 35.13
+        seed 1 => PPO-RLHF: 270.53 ± 42.00
+        seed 2 => PPO-RLHF: 258.47 ± 39.41
     800 pairs :
         seed 0 => PPO-RLHF: 370.03 ± 29.06
         seed 1 => PPO-RLHF: 389.03 ± 28.73
@@ -13,6 +25,18 @@
         seed 2 => PPO-RLHF: 234.20 ± 28.44
 
 - 10000 iterations:
+    500 pairs:
+        seed 0 => PPO-RLHF: 462.77 ± 21.74
+        seed 1 => PPO-RLHF: 477.70 ± 18.43
+        seed 2 => PPO-RLHF: 458.87 ± 23.02
+    600 pairs:
+        seed 0 => PPO-RLHF: 489.67 ± 9.66
+        seed 1 => PPO-RLHF: 492.13 ± 8.33
+        seed 2 => PPO-RLHF: 492.03 ± 8.52
+    700 pairs:
+        seed 0 => PPO-RLHF: 478.57 ± 13.12
+        seed 1 => PPO-RLHF: 488.03 ± 10.41
+        seed 2 => PPO-RLHF: 484.43 ± 11.41
     800 pairs :
         seed 0 => PPO-RLHF: 158.87 ± 8.90
         seed 1 => PPO-RLHF: 165.83 ± 10.09
@@ -27,6 +51,18 @@
         seed 2 => PPO-RLHF: 461.13 ± 21.78
 
 - 15000 iterations:
+    500 pairs:
+        seed 0 => PPO-RLHF: 500.00 ± 0.00
+        seed 1 => PPO-RLHF: 500.00 ± 0.00
+        seed 2 => PPO-RLHF: 500.00 ± 0.00
+    600 pairs:
+        seed 0 => PPO-RLHF: 500.00 ± 0.00
+        seed 1 => PPO-RLHF: 500.00 ± 0.00
+        seed 2 => PPO-RLHF: 500.00 ± 0.00
+    700 pairs:
+        seed 0 => PPO-RLHF: 500.00 ± 0.00
+        seed 1 => PPO-RLHF: 500.00 ± 0.00
+        seed 2 => PPO-RLHF: 500.00 ± 0.00
     800 pairs :
         seed 0 => PPO-RLHF: 500.00 ± 0.00
         seed 1 => PPO-RLHF: 500.00 ± 0.00
