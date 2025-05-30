@@ -1,7 +1,7 @@
 # rlhf_reward_hunters
 EE-568 Reinforcement learning project
 
-### generate_data.py 
+### How to generate preference data
 
 Run it with `python .\generate_data.py`
 
@@ -63,7 +63,7 @@ This script performs the following steps in sequence:
 
 
 
-### run_dpo.py
+### How to Run DPO
 
 Run it with `python .\train_dpo.py`
 
@@ -94,6 +94,36 @@ This script fine-tunes a pretrained policy using Direct Preference Optimization 
 5. **Report Results**  
    - Prints out the average (`mean return`) and variability (`std`) of those 50 evaluation episodes so you can see whether DPO actually improved the true performance.
 
----
 
-**In essence,** this script takes your pretrained “expert” policy, refines it using Direct Preference Optimization on your saved preference pairs, then measures how well the refined policy actually balances the pole under the true environment reward.
+### How to Run PPO-RLHF
+
+#### 1. Train the PPO Subexpert
+```bash
+python train_ppo_subexpert.py
+```
+
+This trains a PPO policy to suboptimal performance and saves it as: `checkpoints/ppo_subexpert.zip`
+
+#### 2. Train Reward Model + Fine-Tune PPO
+```bash
+python sb3_ppo.py
+```
+
+- Trains a reward model using preference data  
+- Fine-tunes the subexpert with PPO using the learned rewards  
+- Saves models like: `checkpoints/ppo_rlhf_cartpole_500`
+
+#### 3. Evaluate PPO-RLHF vs Subexpert
+
+```bash
+python sb3_evaluation.py
+```
+- Loads and evaluates both the PPO subexpert and the PPO-RLHF models  
+- Prints:
+  - Mean rewards  
+  - 95% confidence intervals  
+  - Absolute and relative improvement
+
+  ---
+
+**In essence**, these scripts take the pretrained expert policy, refine it using either DPO or PPO-RLHF on the saved preference pairs, and then evaluate how well the fine-tuned policy performs under the true environment reward—i.e., how well it balances the pole in CartPole.
