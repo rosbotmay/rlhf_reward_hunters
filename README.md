@@ -18,7 +18,7 @@ We evaluate two RLHF algorithms:
 - ** PPO-RLHF (Proximal Policy Optimization with RLHF)**  
   Trains a reward model on preference data, then fine-tunes the policy using PPO with the learned reward model.
 
-We generate synthetic preference data by comparing trajectories from expert and sub-expert policies and evaluate how well each method can recover near-optimal behavior from this feedback.
+We generate synthetic preference data by comparing trajectories from expert and sub-expert policies and evaluate how well each method can recover near optimal behavior from this feedback.
 
 ---
 
