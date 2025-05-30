@@ -41,7 +41,7 @@ class PreferenceDataset(Dataset):
 
 
 
-# === 3. Training loop ===
+
 def train_reward_model(model, preference_pairs, epochs=100, batch_size=32, lr=1e-3):
     dataset = PreferenceDataset(preference_pairs)
     dataloader = DataLoader(dataset, batch_size=batch_size, shuffle=True)
@@ -87,7 +87,6 @@ def evaluate_reward_model(model, preference_pairs,tag="preference"):
     accuracy = correct / total
     print(f"Reward model accuracy on {total} {tag} pairs: {accuracy:.2%}")
 
-# === 4. Load preferences and run training ===
 if __name__ == "__main__":
 
     setting_by_size =  [(500,3e-4),(600,1e-4),(700,1e-4),(1000,1e-4)]
