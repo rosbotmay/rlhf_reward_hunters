@@ -46,6 +46,6 @@ To reproduce the results from the paper:
 
 ---
 
-### 📬 Contact
+### Contact
 
 For questions or issues, feel free to open a GitHub issue or reach out to any of the project contributors.
