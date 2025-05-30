@@ -11,7 +11,7 @@ from config import CHECKPOINT_PAIRS, DATASIZES2, ENV_NAME, SEEDS
 from utils import evaluate_ppo_model
 import numpy as np
 
-# === 1. Policy wrapper to extract log-probs ===
+
 class PolicyWrapper(torch.nn.Module):
     def __init__(self, sb3_model):
         super().__init__()
@@ -23,7 +23,7 @@ class PolicyWrapper(torch.nn.Module):
         logp = dist.log_prob(actions)
         return logp
 
-# === 2. Dataset for preference pairs ===
+
 class PreferenceDataset(Dataset):
     def __init__(self, pairs):
         # Load list of (traj1, traj2, prob) tuples
@@ -48,7 +48,7 @@ def collate_batch(batch):
     obs1, act1, obs2, act2, logits = zip(*batch)
     return obs1, act1, obs2, act2, torch.stack(logits)
 
-# === 4. DPO training loop without reward model ===
+
 def train_dpo(
     ref_sb3,
     tgt_sb3: str,
@@ -117,7 +117,7 @@ def set_seed_for_env(env, seed):
     env.action_space.seed(seed)  # Set the seed for action space
     env.reset(seed=seed)         # Set the seed for the environment reset
 
-# === 5. Example usage ===
+
 if __name__ == '__main__':
     
     ref_ckpt = CHECKPOINT_PAIRS[0][0]
