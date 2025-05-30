@@ -12,10 +12,10 @@ This repository contains the code and experiments for our project comparing two 
 
 We evaluate two RLHF algorithms:
 
-- ** DPO (Direct Preference Optimization)**  
+- **DPO (Direct Preference Optimization)**  
   Directly optimizes a policy using pairwise preferences, bypassing the need to model rewards.
 
-- ** PPO-RLHF (Proximal Policy Optimization with RLHF)**  
+- **PPO-RLHF (Proximal Policy Optimization with RLHF)**  
   Trains a reward model on preference data, then fine-tunes the policy using PPO with the learned reward model.
 
 We generate synthetic preference data by comparing trajectories from expert and sub-expert policies and evaluate how well each method can recover near optimal behavior from this feedback.
