@@ -39,10 +39,10 @@ pip install -r requirements.txt
 To reproduce the results from the paper:
 
 - **CartPole-v1**  
-  Please refer to the detailed instructions in [`./cartpole/Readme.md`](cartpole/Readme.md)
+  Please refer to the detailed instructions in [`/cartpole/Readme.md`](cartpole/README.md)
 
 - **MountainCar-v0**  
-  Please refer to the detailed instructions in [`./mountaincar/Readme.md`](mountaincar/Readme.md)
+  Please refer to the detailed instructions in [`/mountaincar/Readme.md`](mountaincar/README.md)
 
 ---
 
