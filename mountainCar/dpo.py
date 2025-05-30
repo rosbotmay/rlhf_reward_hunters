@@ -146,7 +146,7 @@ if __name__ == '__main__':
         for size in  DATASIZES2:
             preferences = pref_data[:size]
             ft_sb3 = train_dpo(ref_sb3, tgt_sb3, preferences,
-                    batch_size=2, epochs=100, beta=1.0, lr=1e-5, device='cpu',tag=f"seed_{seed}_{size}")
+                    batch_size=32, epochs=100, beta=0.99, lr=3e-4, device='cpu',tag=f"seed_{seed}_{size}")
             r_post_dpo = evaluate_ppo_model(ft_sb3, vec_env, episodes=20)
             np.save(f"results/dpo/post_dpo_rewards_seed_{seed}_{size}.npy", np.array(r_post_dpo))
 
