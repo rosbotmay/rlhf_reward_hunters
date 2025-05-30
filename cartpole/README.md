@@ -126,4 +126,4 @@ python sb3_evaluation.py
 
   ---
 
-**In essence**, these scripts take the pretrained expert policy, refine it using either DPO or PPO-RLHF on the saved preference pairs, and then evaluate how well the fine-tuned policy performs under the true environment reward—i.e., how well it balances the pole in CartPole.
+**In essence**, these scripts take the pretrained expert policy, refine it using either DPO or PPO-RLHF on the saved preference pairs, and then evaluate how well the fine-tuned policy performs under the true environment reward.
